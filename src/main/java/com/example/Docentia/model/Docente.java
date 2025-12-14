@@ -1,4 +1,3 @@
-
 package com.example.Docentia.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -6,13 +5,14 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "docente")
 public class Docente {
 
     @Id
@@ -23,25 +23,24 @@ public class Docente {
     private String apellidos;
     private String email;
     private String siglas;
-    private String tipoFuncionario;
-    private Integer antiguedadCentro;
-    private Double notaOposicion;
-    private String codigoProfesor;
-    private String contrasena;
 
     @ManyToOne
     @JoinColumn(name = "departamento_id")
     private Departamento departamento;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")
-    private Rol rol;
+    @OneToMany(mappedBy = "docente")
+    @JsonIgnore
+    private Set<Rol> roles = new HashSet<>();
+
+    @ManyToMany(mappedBy = "docentesImparten")
+    @JsonIgnore
+    private Set<Asignatura> asignaturasImpartidas = new HashSet<>();
 
     @OneToMany(mappedBy = "docente")
     @JsonIgnore
-    private List<AsuntoPropio> asuntosPropios;
+    private Set<AsuntoPropio> asuntosPropios = new HashSet<>();
 
     @OneToMany(mappedBy = "docenteCubridor")
     @JsonIgnore
-    private List<Falta> faltasCubiertas;
+    private Set<Falta> faltasCubiertas = new HashSet<>();
 }

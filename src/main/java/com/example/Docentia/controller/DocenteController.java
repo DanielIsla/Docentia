@@ -1,4 +1,6 @@
+//TODO Terminar docente: Trabajo en progreso
 
+/*
 package com.example.Docentia.controller;
 
 import com.example.Docentia.dto.DocenteDTO;
@@ -31,3 +33,4 @@ public class DocenteController {
         return docenteService.getDocentesByDepartamento(nombreDepartamento);
     }
 }
+ */

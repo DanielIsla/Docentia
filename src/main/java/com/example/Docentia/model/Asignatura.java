@@ -1,12 +1,13 @@
-
 package com.example.Docentia.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set; // Usamos Set en lugar de List
 
 @Entity
 @Data
@@ -15,7 +16,7 @@ import java.util.List;
 public class Asignatura {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     private String nombre;
@@ -28,9 +29,19 @@ public class Asignatura {
             joinColumns = @JoinColumn(name = "asignatura_id"),
             inverseJoinColumns = @JoinColumn(name = "horario_id")
     )
-    private List<Horario> horarios;
+    @JsonIgnore
+    private Set<Horario> horarios = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "ciclo_id")
     private Ciclo ciclo;
+
+    @ManyToMany
+    @JoinTable(
+            name = "DOCENTE_ASIGNATURA",
+            joinColumns = @JoinColumn(name = "asignatura_id"),
+            inverseJoinColumns = @JoinColumn(name = "docente_id")
+    )
+    @JsonIgnore
+    private Set<Docente> docentesImparten = new HashSet<>();
 }
