@@ -51,12 +51,12 @@ Aquí una tabla con todas las rutas posibles en la API, en conjunto con una indi
 
 ### Solicitar día asuntos propios:
 
-![image.png](image.png)
+![image.png](./DOC/image.png)
 
 ### Consultar día asuntos propios:
 
-![image.png](image%201.png)
+![image.png](./DOC/image%201.png)
 
 ### Validar día de asuntos propios:
 
-![image.png](image%202.png)
+![image.png](./DOC/image%202.png)
